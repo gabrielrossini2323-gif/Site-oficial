@@ -163,7 +163,7 @@ nav a:hover {
     max-width: 100%;
     height: auto;
     max-height: 420px;
-    object-fit: contain; /* ESSENCIA: Impede que a foto seja cortada dos lados */
+    object-fit: contain; /* Impede cortes na imagem */
     border-radius: 8px;
     display: block;
 }
@@ -496,7 +496,7 @@ footer {
     }
 
     .carousel-item img {
-        max-height: 300px; /* Garante tamanho ideal na tela vertical do celular */
+        max-height: 300px; /* Altura perfeita para telas de celulares */
     }
 
     .features-grid {
