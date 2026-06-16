@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. RESET E ESTILOS DE BASE
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -30,9 +27,6 @@ body {
     margin: 0 auto;
 }
 
-/* ==========================================================================
-   2. CABEÇALHO (HEADER)
-   ========================================================================== */
 header {
     background-color: rgba(24, 28, 36, 0.85);
     backdrop-filter: blur(10px);
@@ -79,9 +73,6 @@ nav a:hover {
     color: var(--text-primary);
 }
 
-/* ==========================================================================
-   3. ESTRUTURA DA SEÇÃO PRINCIPAL DO PRODUTO (DESKTOP)
-   ========================================================================== */
 .product-section {
     display: table;
     width: 100%;
@@ -102,7 +93,6 @@ nav a:hover {
     padding-left: 20px;
 }
 
-/* Selo Informativo */
 .badge {
     background-color: rgba(0, 210, 255, 0.15);
     color: var(--accent-blue);
@@ -130,9 +120,6 @@ nav a:hover {
     margin-bottom: 25px;
 }
 
-/* ==========================================================================
-   4. MOTOR DO CARROSSEL (TRAVA DE RESPONSIVIDADE)
-   ========================================================================== */
 .carousel {
     position: relative;
     width: 100%;
@@ -163,12 +150,11 @@ nav a:hover {
     max-width: 100%;
     height: auto;
     max-height: 420px;
-    object-fit: contain; /* Impede cortes na imagem */
+    object-fit: contain;
     border-radius: 8px;
     display: block;
 }
 
-/* Controles de Setas */
 .carousel-control {
     position: absolute;
     top: 50%;
@@ -192,7 +178,6 @@ nav a:hover {
 .carousel-control.prev { left: 15px; }
 .carousel-control.next { right: 15px; }
 
-/* Indicadores de Bolinhas */
 .carousel-dots {
     position: absolute;
     bottom: 15px;
@@ -217,9 +202,6 @@ nav a:hover {
     border-radius: 5px;
 }
 
-/* ==========================================================================
-   5. COMPONENTES E BOTÕES
-   ========================================================================== */
 .center-btn-container {
     width: 100%;
     display: flex;
@@ -279,7 +261,6 @@ nav a:hover {
     color: #ff5722; 
 }
 
-/* Preços */
 .price-container {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -321,7 +302,6 @@ nav a:hover {
     margin-top: 10px;
 }
 
-/* Benefícios */
 .benefits {
     margin-bottom: 35px;
 }
@@ -349,7 +329,6 @@ nav a:hover {
     color: var(--text-secondary);
 }
 
-/* Botões Inferiores */
 .action-buttons {
     display: flex;
     gap: 15px;
@@ -389,9 +368,6 @@ nav a:hover {
     background-color: rgba(255,255,255,0.05);
 }
 
-/* ==========================================================================
-   6. GRADE DE CARACTERÍSTICAS
-   ========================================================================== */
 .features-section {
     background-color: var(--bg-card);
     padding: 8px 0 80px 0;
@@ -449,9 +425,6 @@ nav a:hover {
     font-size: 10.5pt;
 }
 
-/* ==========================================================================
-   7. RODAPÉ (FOOTER)
-   ========================================================================== */
 footer {
     background-color: #0b0d10;
     padding: 40px 0;
@@ -461,9 +434,6 @@ footer {
     font-size: 10pt;
 }
 
-/* ==========================================================================
-   8. RESPONSIVIDADE MOBILE COMPLETA
-   ========================================================================== */
 @media (max-width: 768px) {
     .product-section {
         display: flex;
@@ -496,7 +466,7 @@ footer {
     }
 
     .carousel-item img {
-        max-height: 300px; /* Altura perfeita para telas de celulares */
+        max-height: 300px;
     }
 
     .features-grid {
