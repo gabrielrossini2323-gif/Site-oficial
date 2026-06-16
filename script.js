@@ -1,5 +1,5 @@
 let currentIdx = 0; 
-const totalSlides = 2; // Trava estrita para apenas 2 imagens
+const totalSlides = 2; // Trava estrita para as suas 2 imagens de produto
 
 function updateCarousel() {
     const carouselInner = document.getElementById('carouselInner');
@@ -7,10 +7,10 @@ function updateCarousel() {
     
     if (!carouselInner) return;
 
-    // Move de 100% em 100% de acordo com a arquitetura padrão corrigida
+    // Move as imagens lateralmente de forma suave
     carouselInner.style.transform = `translateX(-${currentIdx * 100}%)`;
     
-    // Atualiza o estado visual das bolinhas indicadoras
+    // Atualiza as bolinhas indicadoras em tempo real
     dots.forEach((dot, index) => {
         if (index === currentIdx) {
             dot.classList.add('active');
@@ -23,11 +23,11 @@ function updateCarousel() {
 function moveSlide(direction) {
     currentIdx += direction;
     
-    // Impede fisicamente que o índice alcance o valor 2 (que seria o 3º slide vazio)
+    // Sistema infinito: vai do último pro primeiro e vice-versa
     if (currentIdx >= totalSlides) {
-        currentIdx = 0; // Volta para o primeiro slide
+        currentIdx = 0; 
     } else if (currentIdx < 0) {
-        currentIdx = totalSlides - 1; // Vai para o último slide real (índice 1)
+        currentIdx = totalSlides - 1; 
     }
     updateCarousel();
 }
@@ -38,17 +38,13 @@ function currentSlide(index) {
 }
 
 /* ==========================================================================
-   FUNÇÃO DE REDIRECIONAMENTO COM LINK DO MERCADO PAGO
+   REDIRECIONAMENTO - LINK DO SEU MERCADO PAGO
    ========================================================================== */
 function checkout() {
-    // IMPORTANTE: Substitua o link abaixo pelo link do produto gerado no seu painel do Mercado Pago
     const linkMercadoPago = "https://mpago.la/1sAse96";
-    
-    // Redireciona o cliente para o ambiente seguro de checkout do Mercado Pago
     window.location.href = linkMercadoPago;
 }
 
 function addCart() {
     checkout();
 }
-
