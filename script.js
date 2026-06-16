@@ -1,55 +1,46 @@
-/**
- * Motor de Gestão Dinâmica do Carrossel e Checkout
- */
-(() => {
-    "use strict";
+let currentIdx = 0; 
+const totalSlides = 3;
 
-    let currentIdx = 0;
-    const totalSlides = 3;
-
-    // Cache de Elementos DOM para evitar queries repetidas e ganho em performance
+function updateCarousel() {
     const carouselInner = document.getElementById('carouselInner');
     const dots = document.querySelectorAll('.dot');
+    
+    if (!carouselInner) return;
 
-    function updateCarousel() {
-        if (!carouselInner) return;
+    // Calcula o deslocamento correto multiplicando pela fração exata de 3 slides (33.3333%)
+    const displacement = currentIdx * (100 / totalSlides);
+    carouselInner.style.transform = `translateX(-${displacement}%)`;
+    
+    dots.forEach((dot, index) => {
+        if (index === currentIdx) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
 
-        // O cálculo do deslocamento baseia-se na divisão exata das larguras (33.3333% * index)
-        const displacement = currentIdx * (100 / totalSlides);
-        carouselInner.style.transform = `translateX(-${displacement}%)`;
-        
-        // Atualização reativa de estados de acessibilidade e classes visuais
-        dots.forEach((dot, index) => {
-            const isActive = index === currentIdx;
-            dot.classList.toggle('active', isActive);
-            dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
+function moveSlide(direction) {
+    currentIdx += direction;
+    
+    if (currentIdx >= totalSlides) {
+        currentIdx = 0; 
+    } else if (currentIdx < 0) {
+        currentIdx = totalSlides - 1; 
     }
+    updateCarousel();
+}
 
-    window.moveSlide = (direction) => {
-        currentIdx += direction;
-        
-        if (currentIdx >= totalSlides) {
-            currentIdx = 0; 
-        } else if (currentIdx < 0) {
-            currentIdx = totalSlides - 1; 
-        }
-        updateCarousel();
-    };
+function currentSlide(index) {
+    currentIdx = index;
+    updateCarousel();
+}
 
-    window.currentSlide = (index) => {
-        if (index >= 0 && index < totalSlides) {
-            currentIdx = index;
-            updateCarousel();
-        }
-    };
+function checkout() {
+    const linkMercadoPago = "https://mpago.la/1sAse96";
+    window.location.href = linkMercagoPago;
+}
 
-    window.checkout = () => {
-        const linkMercadoPago = "https://mpago.la/1sAse96";
-        window.location.href = linkMercadoPago;
-    };
-
-    window.addCart = () => {
-        window.checkout();
-    };
-})();
+function addCart() {
+    checkout();
+}
