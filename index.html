@@ -5,13 +5,454 @@
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendas - Carregador Portátil Power Bank 10K PD</title>
-    <link rel="stylesheet" href="./estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <preconnect href="https://fonts.googleapis.com"></preconnect>
+    <preconnect href="https://fonts.gstatic.com" crossorigin></preconnect>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0f1115;
+            --bg-card: #181c24;
+            --accent-orange: #ff5722;
+            --accent-blue: #00d2ff;
+            --text-primary: #ffffff;
+            --text-secondary: #9aa0a6;
+            --border-color: #2a313d;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark) !important; /* Força o fundo escuro */
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            background-color: rgba(24, 28, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .logo .series {
+            color: var(--accent-orange);
+            font-size: 14px;
+            margin-left: 8px;
+            font-weight: 300;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .product-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 0;
+            align-items: start;
+        }
+
+        .product-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .badge {
+            background-color: rgba(0, 210, 255, 0.15);
+            color: var(--accent-blue);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .carousel-inner {
+            display: flex;
+            width: 300%; 
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-item {
+            width: 33.3333%; 
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(15, 17, 21, 0.7);
+            border: 1px solid var(--border-color);
+            color: white;
+            font-size: 18px;
+            padding: 14px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            user-select: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+        }
+
+        .carousel-control:hover {
+            background-color: var(--accent-orange);
+        }
+
+        .carousel-control.prev { left: 15px; }
+        .carousel-control.next { right: 15px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dots .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dots .dot.active {
+            background-color: var(--accent-orange);
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        .center-btn-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-orange-call {
+            width: 100%;
+            background: var(--accent-orange);
+            color: #ffffff;
+            border: none;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+            transition: background 0.2s, transform 0.1s;
+            text-transform: uppercase;
+        }
+
+        .btn-orange-call:active {
+            transform: scale(0.99);
+        }
+
+        .tech-tags-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tags-gallery span {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tech-tags-gallery span i {
+            color: var(--accent-orange);
+        }
+
+        .price-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .old-price {
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .current-price-box {
+            display: flex;
+            align-items: flex-start;
+            margin: 5px 0;
+        }
+
+        .current-price-box .currency {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 6px;
+            margin-right: 5px;
+        }
+
+        .current-price-box .price {
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .payment-methods {
+            color: #4ade80;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .product-info-extra {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item i {
+            font-size: 22px;
+            color: var(--accent-blue);
+        }
+
+        .benefit-item strong {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .benefit-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .btn-primary {
+            flex: 2;
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .features-section {
+            background-color: var(--bg-card);
+            padding: 60px 0 80px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .icon-box {
+            background-color: rgba(255, 87, 34, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box i {
+            color: var(--accent-orange);
+            font-size: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .main-footer {
+            background-color: #0b0d10;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 992px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .product-info-extra {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-<body class="notranslate">
+<body>
 
     <header class="main-header">
         <div class="container nav-container">
@@ -47,23 +488,23 @@
             <div class="carousel" role="region" aria-label="Carrossel de imagens do produto">
                 <div class="carousel-inner" id="carouselInner">
                     <figure class="carousel-item">
-                        <img src="Carregad.png" alt="i2GO Power Bank 10K PD - Embalagem do Produto">
+                        <img src="Carregad.png" alt="i2GO Power Bank 10K PD">
                     </figure>
                     <figure class="carousel-item">
-                        <img src="Carrega.png" alt="i2GO Power Bank 10K PD - Saídas e Conexões Detalhadas">
+                        <img src="Carrega.png" alt="i2GO Power Bank 10K PD - Saídas">
                     </figure>
                     <figure class="carousel-item">
-                        <img src="Carregado.png" alt="i2GO Power Bank 10K PD - Vista Geral de Carregamento">
+                        <img src="Carregado.png" alt="i2GO Power Bank 10K PD - Carregamento">
                     </figure>
                 </div>
                 
-                <button class="carousel-control prev" onclick="moveSlide(-1)" aria-label="Slide anterior">&#10094;</button>
-                <button class="carousel-control next" onclick="moveSlide(1)" aria-label="Próximo slide">&#10095;</button>
+                <button class="carousel-control prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-control next" onclick="moveSlide(1)">&#10095;</button>
                 
-                <div class="carousel-dots" role="tablist" aria-label="Indicadores dos slides">
-                    <button class="dot active" onclick="currentSlide(0)" role="tab" aria-selected="true" aria-label="Slide 1"></button>
-                    <button class="dot" onclick="currentSlide(1)" role="tab" aria-selected="false" aria-label="Slide 2"></button>
-                    <button class="dot" onclick="currentSlide(2)" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+                <div class="carousel-dots">
+                    <button class="dot active" onclick="currentSlide(0)"></button>
+                    <button class="dot" onclick="currentSlide(1)"></button>
+                    <button class="dot" onclick="currentSlide(2)"></button>
                 </div>
             </div>
 
@@ -72,68 +513,68 @@
             </div>
 
             <div class="tech-tags-gallery">
-                <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> 20W Power Delivery</span>
-                <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> Inteligência AI Charge</span>
-                <span><i class="fa-solid fa-circle-nodes" aria-hidden="true"></i> 3 Saídas (A + A + C)</span>
+                <span><i class="fa-solid fa-bolt"></i> 20W Power Delivery</span>
+                <span><i class="fa-solid fa-microchip"></i> Inteligência AI Charge</span>
+                <span><i class="fa-solid fa-circle-nodes"></i> 3 Saídas (A + A + C)</span>
             </div>
         </section>
 
-        <section class="product-info-extra" aria-label="Benefícios e ações">
+        <section class="product-info-extra">
             <div class="benefits">
                 <div class="benefit-item">
-                    <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                    <i class="fa-solid fa-truck-fast"></i>
                     <div>
                         <strong>Frete Expresso Comercial</strong>
-                        <p>Envio imediato para todo o Brasil com código de rastreamento.</p>
+                        <p>Envio imediato para todo o Brasil.</p>
                     </div>
                 </div>
                 <div class="benefit-item">
-                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <i class="fa-solid fa-shield-halved"></i>
                     <div>
                         <strong>Garantia Oficial i2GO</strong>
-                        <p>Produto 100% original com certificação e proteção contra curto-circuito.</p>
+                        <p>Produto original com certificação.</p>
                     </div>
                 </div>
             </div>
 
             <div class="action-buttons">
-                <button class="btn-primary" onclick="checkout()"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Finalizar Compra</button>
-                <button class="btn-secondary" onclick="addCart()"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Adicionar ao Carrinho</button>
+                <button class="btn-primary" onclick="checkout()"><i class="fa-solid fa-cart-shopping"></i> Finalizar Compra</button>
+                <button class="btn-secondary" onclick="addCart()"><i class="fa-solid fa-bag-shopping"></i> No Carrinho</button>
             </div>
         </section>
     </main>
 
-    <section class="features-section" id="caracteristicas" aria-labelledby="features-title">
+    <section class="features-section" id="caracteristicas">
         <div class="container">
-            <h2 class="section-title" id="features-title">Por que escolher o i2GO Pro Series?</h2>
+            <h2 class="section-title">Por que escolher o i2GO Pro Series?</h2>
             <div class="features-grid">
                 <article class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-battery-three-quarters" aria-hidden="true"></i></div>
+                    <div class="icon-box"><i class="fa-solid fa-battery-three-quarters"></i></div>
                     <h3>Capacidade Real 10.000 mAh</h3>
-                    <p>Fornece até 4 cargas extras completas para o seu smartphone para te manter conectado em qualquer viagem.</p>
+                    <p>Fornece até 4 cargas extras completas para o seu smartphone.</p>
                 </article>
                 <article class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
+                    <div class="icon-box"><i class="fa-solid fa-gauge-high"></i></div>
                     <h3>Carregamento Turbo de 20W</h3>
-                    <p>Equipado com tecnologia Power Delivery (PD). Vá de 0% a 50% de bateria do seu dispositivo em apenas 30 minutos.</p>
+                    <p>Equipado com tecnologia Power Delivery (PD).</p>
                 </article>
                 <article class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-desktop" aria-hidden="true"></i></div>
+                    <div class="icon-box"><i class="fa-solid fa-desktop"></i></div>
                     <h3>Display Digital Inteligente</h3>
-                    <p>Visor em LED digital integrado de alta definição que mostra em tempo real a porcentagem exata de energia restante.</p>
+                    <p>Visor em LED digital integrado de alta definição.</p>
                 </article>
                 <article class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-plug" aria-hidden="true"></i></div>
+                    <div class="icon-box"><i class="fa-solid fa-plug"></i></div>
                     <h3>Tripla Conexão Flexível</h3>
-                    <p>Possui 2 saídas USB-A convencionais e 1 saída/entrada moderna USB-C inteligente de alta velocidade.</p>
+                    <p>Possui 2 saídas USB-A e 1 saída/entrada USB-C.</p>
                 </article>
             </div>
         </div>
     </section>
 
     <footer class="main-footer">
-        <div class="container footer-content">
-            <p>&copy; 2026 i2GO Pro Series Loja Premium. Todos os direitos reservados.</p>
+        <div class="container">
+            <p>&copy; 2026 i2GO Pro Series Loja Premium.</p>
         </div>
     </footer>
 
