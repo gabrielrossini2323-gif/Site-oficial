@@ -1,5 +1,5 @@
 let currentIdx = 0; 
-const totalSlides = 2;
+const totalSlides = 3;
 
 function updateCarousel() {
     const carouselInner = document.getElementById('carouselInner');
