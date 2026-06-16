@@ -1,44 +1,55 @@
-let currentIdx = 0; 
-const totalSlides = 3;
+/**
+ * Motor de Gestão Dinâmica do Carrossel e Checkout
+ */
+(() => {
+    "use strict";
 
-function updateCarousel() {
+    let currentIdx = 0;
+    const totalSlides = 3;
+
+    // Cache de Elementos DOM para evitar queries repetidas e ganho em performance
     const carouselInner = document.getElementById('carouselInner');
     const dots = document.querySelectorAll('.dot');
-    
-    if (!carouselInner) return;
 
-    carouselInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-    
-    dots.forEach((dot, index) => {
-        if (index === currentIdx) {
-            dot.classList.add('active');
-        } else {
-            dot.classList.remove('active');
-        }
-    });
-}
+    function updateCarousel() {
+        if (!carouselInner) return;
 
-function moveSlide(direction) {
-    currentIdx += direction;
-    
-    if (currentIdx >= totalSlides) {
-        currentIdx = 0; 
-    } else if (currentIdx < 0) {
-        currentIdx = totalSlides - 1; 
+        // O cálculo do deslocamento baseia-se na divisão exata das larguras (33.3333% * index)
+        const displacement = currentIdx * (100 / totalSlides);
+        carouselInner.style.transform = `translateX(-${displacement}%)`;
+        
+        // Atualização reativa de estados de acessibilidade e classes visuais
+        dots.forEach((dot, index) => {
+            const isActive = index === currentIdx;
+            dot.classList.toggle('active', isActive);
+            dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
     }
-    updateCarousel();
-}
 
-function currentSlide(index) {
-    currentIdx = index;
-    updateCarousel();
-}
+    window.moveSlide = (direction) => {
+        currentIdx += direction;
+        
+        if (currentIdx >= totalSlides) {
+            currentIdx = 0; 
+        } else if (currentIdx < 0) {
+            currentIdx = totalSlides - 1; 
+        }
+        updateCarousel();
+    };
 
-function checkout() {
-    const linkMercadoPago = "https://mpago.la/1sAse96";
-    window.location.href = linkMercadoPago;
-}
+    window.currentSlide = (index) => {
+        if (index >= 0 && index < totalSlides) {
+            currentIdx = index;
+            updateCarousel();
+        }
+    };
 
-function addCart() {
-    checkout();
-}
+    window.checkout = () => {
+        const linkMercadoPago = "https://mpago.la/1sAse96";
+        window.location.href = linkMercadoPago;
+    };
+
+    window.addCart = () => {
+        window.checkout();
+    };
+})();
